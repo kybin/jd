@@ -10,13 +10,7 @@ function jd {
 }
 ```
 
-source it.
-
-```bash
-source ~/.bashrc
-```
-
-then
+source it. then,
 
 ```bash
 cd
