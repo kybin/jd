@@ -8,6 +8,12 @@ function jd {
 }
 ```
 
+source it.
+
+```bash
+source ~/.bashrc
+```
+
 then
 
 ```bash
