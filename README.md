@@ -32,13 +32,10 @@ create ```/etc/bash_completion.d/jd``` and paste this.
 ```bash
 _jd() 
 {
-    local cur prev
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    
     COMPREPLY=()
     if [ -d ~/.jump ]; then
         local dirs=`ls ~/.jump`
+        local cur="${COMP_WORDS[COMP_CWORD]}"
         COMPREPLY=($(compgen -W "${dirs}" -- ${cur}))
         return 0
     fi
