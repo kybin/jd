@@ -6,16 +6,29 @@ copy and paste this code in your .bashrc
 
 ```bash
 function jd {
-    cd -P "${HOME}/.jump/$1"
+    cd -P "$HOME/.jd/$1"
 }
+
+function _jd {
+    COMPREPLY=()
+    if [ -d ~/.jd ]; then
+        local dirs=`ls ~/.jd`
+        local cur="${COMP_WORDS[COMP_CWORD]}"
+        COMPREPLY=($(compgen -W "$dirs" -- $cur))
+        return 0
+    fi
+}
+
+complete -F _jd jd
 ```
 
-source it. then,
+source it.
+
+then,
 
 ```bash
-cd
-mkdir .jump
-cd .jump
+mkdir $HOME/.jd
+cd $HOME/.jd
 ln -s {destdir} {key}
 ```
 
@@ -25,20 +38,3 @@ finally, you can jump.
 jd {key}
 ```
 
-#### Completion
-
-create ```/etc/bash_completion.d/jd``` and paste this.
-
-```bash
-_jd() 
-{
-    COMPREPLY=()
-    if [ -d ~/.jump ]; then
-        local dirs=`ls ~/.jump`
-        local cur="${COMP_WORDS[COMP_CWORD]}"
-        COMPREPLY=($(compgen -W "${dirs}" -- ${cur}))
-        return 0
-    fi
-}
-complete -F _jd jd
-```
